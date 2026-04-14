@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Input Mahasiswa</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif; background: #f0f4f8;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0;
+        }
+        .form-card {
+            background: white; padding: 40px; border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            width: 400px; position: relative;
+        }
+        .form-card::before {
+            content: ""; position: absolute; top: 0; left: 0; right: 0;
+            height: 6px; background: #1e3c72; border-radius: 12px 12px 0 0;
+        }
+        h2 { color: #334155; margin-bottom: 30px; text-align: center; }
+        .input-group { margin-bottom: 20px; }
+        .input-group label { display: block; margin-bottom: 8px; color: #64748b; font-weight: 600; font-size: 14px; }
+        input[type="text"] {
+            width: 100%; padding: 12px; border: 2px solid #e2e8f0;
+            border-radius: 8px; box-sizing: border-box; transition: 0.3s;
+        }
+        input[type="text"]:focus { border-color: #1e3c72; outline: none; }
+        .radio-group { display: flex; gap: 20px; background: #f8fafc; padding: 10px; border-radius: 8px; }
+        button {
+            width: 100%; padding: 14px; background: #1e3c72;
+            color: white; border: none; border-radius: 8px;
+            cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s;
+        }
+        button:hover { background: #0f172a; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #94a3b8; text-decoration: none; font-size: 14px; }
+        .back-link:hover { color: #1e3c72; }
+    </style>
+</head>
+<body>
+<div class="form-card">
+    <h2>Registrasi Mahasiswa</h2>
+    <form th:action="@{/submit-form}" th:object="${user}" method="post">
+        <div class="input-group">
+            <label>Nama Lengkap</label>
+            <input type="text" th:field="*{nama}" placeholder="Contoh: Khoirul Arif" required>
+        </div>
+        <div class="input-group">
+            <label>Nomor Induk Mahasiswa (NIM)</label>
+            <input type="text" th:field="*{nim}" placeholder="Contoh: 20240140011" required>
+        </div>
+        <div class="input-group">
+            <label>Jenis Kelamin</label>
+            <div class="radio-group">
+                <label style="font-weight: normal; font-size: 14px;">
+                    <input type="radio" th:field="*{jenisKelamin}" value="Laki-laki"> Laki-laki
+                </label>
+                <label style="font-weight: normal; font-size: 14px;">
+                    <input type="radio" th:field="*{jenisKelamin}" value="Perempuan"> Perempuan
+                </label>
+            </div>
+        </div>
+        <button type="submit">Simpan ke Database</button>
+    </form>
+    <a th:href="@{/home}" class="back-link">Batal dan Kembali</a>
+</div>
+</body>
+</html>
