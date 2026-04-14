@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Home - Data Mahasiswa</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif; background: #f4f7f6;
+            margin: 0; padding: 40px; color: #444;
+        }
+        .wrapper { max-width: 1000px; margin: auto; }
+        header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 30px; border-bottom: 3px solid #1e3c72; padding-bottom: 15px;
+        }
+        h1 { margin: 0; font-size: 24px; color: #1e3c72; }
+        .card {
+            background: white; border-radius: 15px; padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .btn-input {
+            background: #27ae60; color: white; padding: 12px 25px;
+            text-decoration: none; border-radius: 30px; font-weight: 600;
+            display: inline-block; margin-bottom: 25px; transition: 0.3s;
+        }
+        .btn-input:hover { background: #2ecc71; transform: scale(1.05); }
+        table { width: 100%; border-collapse: collapse; }
+        th {
+            text-align: left; padding: 15px; background: #f8fafc;
+            color: #64748b; font-size: 13px; text-transform: uppercase;
+        }
+        td { padding: 15px; border-bottom: 1px solid #f1f5f9; }
+        tr:hover { background: #f1f7ff; }
+        .logout-link { color: #94a3b8; text-decoration: none; font-size: 14px; }
+        .logout-link:hover { color: #e74c3c; }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <header>
+        <h1>Website 20240140011</h1>
+        <a th:href="@{/}" class="logout-link">Keluar Aplikasi</a>
+    </header>
+    <div class="card">
+        <h3>Dashboard Mahasiswa</h3>
+        <a th:href="@{/form}" class="btn-input">+ Tambah Mahasiswa</a>
+        <table>
+            <thead>
+            <tr>
+                <th>No</th>
+                <th>Nama Lengkap</th>
+                <th>NIM</th>
+                <th>Gender</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:if="${#lists.isEmpty(users)}">
+                <td colspan="4" style="text-align: center; padding: 40px; color: #999;">Database kosong.</td>
+            </tr>
+            <tr th:each="user, stat : ${users}">
+                <td th:text="${stat.count}">1</td>
+                <td th:text="${user.nama}" style="font-weight: 600;">Nama</td>
+                <td th:text="${user.nim}">NIM</td>
+                <td th:text="${user.jenisKelamin}">Jenis Kelamin</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
